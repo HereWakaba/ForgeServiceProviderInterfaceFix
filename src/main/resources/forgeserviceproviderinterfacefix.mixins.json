@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ryjs.forgeserviceproviderinterfacefix.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "forgeserviceproviderinterfacefix.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
