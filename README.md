@@ -1,15 +1,17 @@
 # ForgeServiceProviderinterfaceFix
 
-> 让"实现了 ForgeSPI 的 jar"重新被当作普通 Mod 加载 —— 在 ModLauncher 时代恢复
+可可你啥时候学会自清理。manifest的优先级太高了。能不能拜师。
+
+> 让“实现了 ForgeSPI 的 jar”重新被当作普通 Mod 加载 —— 在 ModLauncher 时代恢复
 > `FMLCorePluginContainsFMLMod: true` 的语义。
 
-Fixes for **Minecraft 1.20.1 / Forge 47.4.16+**（实测版本 47.4.20，JDK 17）。
+修复了 **Minecraft 1.20.1 / Forge 47.4.16+**（实测版本 47.4.20，JDK 17）。
 
 ---
 
 ## 问题背景
 
-Forge 1.13 把启动包装层从 `LaunchWrapper` 换成了 **ModLauncher**，随之移除了
+Forge 1.13 将启动包装层从 `LaunchWrapper` 换成了 **ModLauncher**，随之移除了
 `FMLCorePluginContainsFMLMod: true` 这个机制。
 
 老版本（1.12.2）里，一个 jar 可以同时是 CoreMod 和普通 Mod：
@@ -17,8 +19,8 @@ Forge 1.13 把启动包装层从 `LaunchWrapper` 换成了 **ModLauncher**，随
 ```java
 // net.minecraftforge.fml.relauncher.CoreModManager
 classLoader.addURL(coreMod.toURI().toURL());
-if (!mfAttributes.containsKey(COREMODCONTAINSFMLMOD)) {
-    // 没有标记 → 只当 coremod，"it will not be examined again"
+如果 (!mfAttributes.containsKey(COREMODCONTAINSFMLMOD)) {
+    // 未标记 → 仅作为核心模组，"将不再被检查"
     ignoredModFiles.add(coreMod.getName());
 } else {
     // 有标记 → 重新放回 mod 候选池
